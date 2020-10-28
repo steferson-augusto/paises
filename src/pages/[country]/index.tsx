@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 
-import data, { Data } from '../../assets/data'
+import data, { Data } from '../../data'
 import Structure, { Menu } from '../../styles/components/Structure'
 import {
   Body,

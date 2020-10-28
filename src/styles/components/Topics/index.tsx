@@ -2,7 +2,7 @@ import parse from 'html-react-parser'
 
 import { Subtitle, Container, ContainerImages } from '../index'
 import ConditionalComponent from '../ConditionalComponent'
-import { Topic } from '../../../assets/data'
+import { Topic } from '../../../data'
 
 interface TopicProps {
   topics: Topic[]

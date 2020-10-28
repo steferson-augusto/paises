@@ -2,8 +2,8 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import parse from 'html-react-parser'
 
-import { Page } from '../../assets/data'
-import data from '../../assets/data'
+import data, { Page } from '../../data'
+
 import Structure, { Menu } from '../../styles/components/Structure'
 import ConditionalComponent from '../../styles/components/ConditionalComponent'
 import Topics from '../../styles/components/Topics'
@@ -65,7 +65,7 @@ export default function Irlanda({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // const paths = data.pages.map(({ key }) => ({ params: { key } }))
-  let paths = []
+  const paths = []
   data.map(({ key: country, pages }) =>
     pages.map(({ key }) => {
       paths.push({ params: { country, key } })

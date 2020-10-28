@@ -4,7 +4,7 @@ import Switch from 'react-switch'
 import { ThemeContext } from 'styled-components'
 import { lighten } from 'polished'
 
-import { Page } from '../../../assets/data'
+import { Page } from '../../../data'
 import { Container, Left, Sidebar, Center, Mark } from './styles'
 import dark from '../../themes/dark'
 import light from '../../themes/light'
