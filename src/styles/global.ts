@@ -100,4 +100,8 @@ export default createGlobalStyle`
       color: #fff;
     }
   }
+
+  .selected {
+    color: '#f00';
+  }
 `

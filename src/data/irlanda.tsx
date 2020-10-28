@@ -105,14 +105,14 @@ const irlanda: Data = {
             para a redução do desemprego.
           </p>
           <p>
-            Hoje a{' '}
+            Hoje a
             <a
               href="https://www.eurodicas.com.br/moeda-da-irlanda/"
               target="_blank"
               rel="noreferrer"
             >
               moeda oficial na Irlanda
-            </a>{' '}
+            </a>
             é o Euro, mas antes da entrada do país na União Europeia, a moeda
             oficial era a Libra Irlandesa.
           </p>
@@ -126,7 +126,7 @@ const irlanda: Data = {
       content: reactElementToJSXString(
         <div>
           <p>
-            A capital do país é a famosa{' '}
+            A capital do país é a famosa
             <a
               href="https://www.eurodicas.com.br/viver-em-dublin/"
               target="_blank"
@@ -174,14 +174,14 @@ const irlanda: Data = {
                 valorizadíssimas cervejas irlandesas.
               </p>
               <p>
-                Para quem aprecia a famosa cerveja Guiness, conhecer o{' '}
+                Para quem aprecia a famosa cerveja Guiness, conhecer o
                 <a
                   href="https://www.guinness-storehouse.com/en"
                   target="_blank"
                   rel="noreferrer"
                 >
                   The Guiness Storehouse
-                </a>{' '}
+                </a>
                 é um passeio indicado. Aliás, ele já foi considerado a principal
                 atração turística da Europa.
               </p>
@@ -195,14 +195,14 @@ const irlanda: Data = {
               <p>
                 A capital ainda oferece outras atrações turísticas
                 interessantes, como parque e museus. Dentre os passeios que acho
-                imperdíveis estão a visita a{' '}
+                imperdíveis estão a visita a
                 <a
                   href="https://www.stpatrickscathedral.ie/"
                   target="_blank"
                   rel="noreferrer"
                 >
                   Catedral de São Patrício
-                </a>{' '}
+                </a>
                 e o Castelo de Dublin.
               </p>
             </div>
@@ -213,7 +213,7 @@ const irlanda: Data = {
           content: reactElementToJSXString(
             <div>
               <p>
-                Outra atração é o lindo{' '}
+                Outra atração é o lindo
                 <a
                   href="https://www.tripadvisor.pt/Attraction_Review-g186605-d189068-Reviews-Phoenix_Park-Dublin_County_Dublin.html"
                   target="_blank"

@@ -1,7 +1,5 @@
 import Head from 'next/head'
 
-import Structure from '../styles/components/Structure'
-
 const Home: React.FC = () => {
   return (
     <div>
@@ -10,9 +8,7 @@ const Home: React.FC = () => {
       </Head>
 
       <main>
-        <Structure title="Home">
-          <p>hello worlds</p>
-        </Structure>
+        <p>hello worlds</p>
       </main>
     </div>
   )

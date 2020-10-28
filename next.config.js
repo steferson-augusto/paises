@@ -13,5 +13,14 @@ module.exports = {
         ]
       }
     ]
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/irlanda/',
+        permanent: true,
+      },
+    ]
   }
 }
