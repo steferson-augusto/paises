@@ -1,6 +1,19 @@
 import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
+  :root {
+    --bg-color: ${props => props.theme.colors.background};
+    --text-color: ${props => props.theme.colors.text};
+    --primary: ${props => props.theme.colors.primary};
+    --secondary: ${props => props.theme.colors.secondary};
+    --sidebar-bg: ${props => props.theme.colors.sidebar.background};
+    --sidebar-hover: ${props => props.theme.colors.sidebar.hover};
+    --surface-bg: ${props => props.theme.colors.surface.background};
+    --surface-hover: ${props => props.theme.colors.surface.hover};
+    --header-bg: ${props => props.theme.colors.header.background};
+    --header-text: ${props => props.theme.colors.header.text};
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -8,62 +21,88 @@ export default createGlobalStyle`
   }
 
   body {
-    background-color: #121214;
-    color: #e1e1e6;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font: 400 16px Roboto, sans-serif;
   }
 
-  .customButton {
-    border-radius: 4px;
-    background-color: #121214;
-    border: 2px solid #fff;
-    color: #ffffff;
-    text-align: center;
-    font-size: 18px;
-    padding: 5px 10px;
-    width: 135px;
-    cursor: pointer;
-    margin-top: 5px;
-    margin-bottom: 0;
-    opacity: 0.6;
-    transition: all 0.5s;
-    box-shadow: 0 0 4px #fff;
-    background-position: center;
-
-    span {
-      cursor: pointer;
-      display: inline-block;
-      position: relative;
-      transition: 0.5s;
-
-      &:after {
-        content: '\\2764';
-        position: absolute;
-        opacity: 0;
-        top: 0;
-        right: -20px;
-        transition: 0.5s;
-      }
+  #check {
+    display: none;
+    
+    &:checked ~ .content{
+      margin-left: 60px;
     }
 
-    &:hover {
-      opacity: 1;
-      background: #86027a radial-gradient(circle, transparent 1%, #86027a 1%)
-        center/15000%;
-      span {
-        padding-right: 25px;
+    &:checked ~ .sidebar{
+    left: -190px;
 
-        &:after {
-          opacity: 1;
-          right: 0;
+      a {
+        font-size: 20px;
+        margin-left: 190px;
+        width: 60px;
+        text-align: center;
+        padding: 0;
+
+        i {
+          padding: 0;
+        }
+
+        span{
+          display: none;
+        }
+      }
+
+      .center {
+        margin-left: 190px;
+        img {
+          width: 40px;
+          padding-top: 10px;
+        }
+
+        h4 {
+          display: none;
         }
       }
     }
+  }
 
-    &:active {
-      background-color: #444;
-      background-size: 100%;
-      transition: background 0s;
+  .content{
+    margin-left: 250px;
+    padding-top: 40px;
+    height: 100vh;
+    transition: 0.5s;
+  }
+
+  #check-bottom-img input:checked ~ img {
+    transform: scale(2);
+    cursor: zoom-out;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .container div p {
+    margin: auto;
+    width: 90%;
+    font-size: 16px;
+    padding: 6px 20px;
+    line-height: 1.5;
+
+    &::selection {
+      background: var(--primary);
+      color: #fff;
+    }
+  }
+
+  .container div a {
+    text-decoration: none;
+    color: var(--primary);
+    font-size: 16px;
+
+    &::selection {
+      background: var(--primary);
+      color: #fff;
     }
   }
 `

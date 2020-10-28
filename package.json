@@ -17,9 +17,11 @@
     "mongodb": "^3.6.2",
     "next": "9.5.3",
     "next-images": "^1.6.0",
+    "polished": "^4.0.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-element-to-jsx-string": "^14.3.1",
+    "react-switch": "^5.0.1",
     "sass": "^1.26.12",
     "styled-components": "^5.2.0",
     "swiper": "^6.3.2"
