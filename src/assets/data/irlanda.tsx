@@ -109,6 +109,7 @@ const irlanda: Data = {
             <a
               href="https://www.eurodicas.com.br/moeda-da-irlanda/"
               target="_blank"
+              rel="noreferrer"
             >
               moeda oficial na Irlanda
             </a>{' '}
@@ -129,6 +130,7 @@ const irlanda: Data = {
             <a
               href="https://www.eurodicas.com.br/viver-em-dublin/"
               target="_blank"
+              rel="noreferrer"
             >
               cidade de Dublin,
             </a>
@@ -176,6 +178,7 @@ const irlanda: Data = {
                 <a
                   href="https://www.guinness-storehouse.com/en"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   The Guiness Storehouse
                 </a>{' '}
@@ -193,7 +196,11 @@ const irlanda: Data = {
                 A capital ainda oferece outras atrações turísticas
                 interessantes, como parque e museus. Dentre os passeios que acho
                 imperdíveis estão a visita a{' '}
-                <a href="https://www.stpatrickscathedral.ie/" target="_blank">
+                <a
+                  href="https://www.stpatrickscathedral.ie/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Catedral de São Patrício
                 </a>{' '}
                 e o Castelo de Dublin.
@@ -210,6 +217,7 @@ const irlanda: Data = {
                 <a
                   href="https://www.tripadvisor.pt/Attraction_Review-g186605-d189068-Reviews-Phoenix_Park-Dublin_County_Dublin.html"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Phoenix Park,
                 </a>
