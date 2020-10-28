@@ -64,7 +64,6 @@ const Structure: React.FC<StructureProps> = ({
           <Center className="center">
             <img
               src={`/images/${title.toLowerCase()}/bandeira.svg`}
-              className="profile_image"
               alt="bandeira"
             />
             <h4>{title}</h4>

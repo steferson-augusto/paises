@@ -54,20 +54,6 @@ export const ContainerImages = styled.div`
   padding-top: 40px;
   display: flex;
   justify-content: space-around;
-
-  input {
-    display: none;
-    &:checked ~ img {
-      transform: scale(2);
-      cursor: zoom-out;
-    }
-  }
-
-  img {
-    height: 150px;
-    transition: transform 0.25s ease;
-    cursor: zoom-in
-  }
 `
 
 export const Redirect = styled.a`

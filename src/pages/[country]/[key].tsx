@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
+import Image from 'next/image'
 import parse from 'html-react-parser'
 
 import data, { Page } from '../../data'
@@ -41,17 +42,14 @@ export default function Irlanda({
             <Title>{page.title}</Title>
             <ConditionalComponent content={page.imageTop}>
               <ContainerImages>
-                <img src={page.imageTop} />
+                <Image src={page.imageTop} height="200" width="300" />
               </ContainerImages>
             </ConditionalComponent>
 
             {parse(content)}
             <ConditionalComponent content={page.imageBottom}>
-              <ContainerImages id="check-bottom-img">
-                <label>
-                  <input type="checkbox" />
-                  <img src={page.imageBottom} />
-                </label>
+              <ContainerImages className="check-img">
+                <Image src={page.imageBottom} height="200" width="300" />
               </ContainerImages>
             </ConditionalComponent>
 

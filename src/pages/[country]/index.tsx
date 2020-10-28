@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
+import Image from 'next/image'
 
 import data, { Data } from '../../data'
 import Structure, { Menu } from '../../styles/components/Structure'
@@ -37,8 +38,16 @@ export default function Irlanda({
             <Title>{page.title}</Title>
             <Description>{page.content}</Description>
             <ContainerImages>
-              <img src={`/images/${page.title.toLowerCase()}/bandeira.svg`} />
-              <img src={`/images/${page.title.toLowerCase()}/armas.svg`} />
+              <Image
+                src={`/images/${page.key}/bandeira.svg`}
+                width="300"
+                height="150"
+              />
+              <Image
+                src={`/images/${page.key}/armas.svg`}
+                width="140"
+                height="150"
+              />
             </ContainerImages>
           </Body>
         </Structure>

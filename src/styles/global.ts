@@ -73,11 +73,6 @@ export default createGlobalStyle`
     transition: 0.5s;
   }
 
-  #check-bottom-img input:checked ~ img {
-    transform: scale(2);
-    cursor: zoom-out;
-  }
-
   .container {
     width: 100%;
   }
