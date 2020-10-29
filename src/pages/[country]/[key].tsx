@@ -30,7 +30,10 @@ export default function Irlanda({
   return (
     <div>
       <Head>
-        <title>{title}</title>
+        <title>
+          {title}
+          {key === 'home' ? '' : ` - ${page.title}`}
+        </title>
         <link rel="icon" href={`/images/${title.toLowerCase()}/favicon.ico`} />
       </Head>
 
