@@ -43,6 +43,7 @@ export default createGlobalStyle`
         width: 60px;
         text-align: center;
         padding: 0;
+        padding-right: 10px;
 
         i {
           padding: 0;
