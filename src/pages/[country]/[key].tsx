@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -14,6 +15,7 @@ interface Props {
   page: Page
   menu: Menu[]
   title: string
+  country: string
   toogleTheme: () => void
 }
 
@@ -21,9 +23,10 @@ export default function Irlanda({
   page,
   menu,
   title,
+  country,
   toogleTheme
 }: Props): JSX.Element {
-  const { content, topics } = page
+  const { content, topics, key } = page
   return (
     <div>
       <Head>
@@ -36,10 +39,10 @@ export default function Irlanda({
           title={title}
           menu={menu}
           toogleTheme={toogleTheme}
-          subtitle={page.title}
+          subtitle={key === 'home' ? '' : page.title}
         >
           <Body className="container">
-            <Title>{page.title}</Title>
+            <Title>{key === 'home' ? title : page.title}</Title>
             <ConditionalComponent content={page.imageTop}>
               <ContainerImages>
                 <Image src={page.imageTop} height="200" width="300" />
@@ -47,11 +50,26 @@ export default function Irlanda({
             </ConditionalComponent>
 
             {parse(content)}
-            <ConditionalComponent content={page.imageBottom}>
+            {key === 'home' ? (
               <ContainerImages className="check-img">
-                <Image src={page.imageBottom} height="200" width="300" />
+                <Image
+                  src={`/images/${country}/bandeira.svg`}
+                  width="300"
+                  height="150"
+                />
+                <Image
+                  src={`/images/${country}/armas.svg`}
+                  width="140"
+                  height="150"
+                />
               </ContainerImages>
-            </ConditionalComponent>
+            ) : (
+              <ConditionalComponent content={page.imageBottom}>
+                <ContainerImages className="check-img">
+                  <Image src={page.imageBottom} height="200" width="300" />
+                </ContainerImages>
+              </ConditionalComponent>
+            )}
 
             <Topics topics={topics} />
           </Body>
@@ -86,6 +104,6 @@ export const getStaticProps: GetStaticProps = async context => {
     .filter(({ key }) => key !== 'home')
 
   return {
-    props: { page, menu, title: nation.title }
+    props: { page, menu, title: nation.title, country }
   }
 }
