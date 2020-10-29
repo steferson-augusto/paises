@@ -41,6 +41,7 @@ export const Left = styled.div`
 export const Sidebar = styled.div`
   background: var(--sidebar-bg);
   margin-top: 40px;
+  padding-bottom: 30px;
   padding-top: 0px;
   position: fixed;
   left: 0;
@@ -48,6 +49,22 @@ export const Sidebar = styled.div`
   height: 100%;
   transition: 0.5s;
   transition-property: left;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    background: var(--sidebar-bg);
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 10px 10px var(--sidebar-bg);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 10px 10px var(--header-bg);
+    border: solid 2px transparent;
+    border-radius: 10px;
+  }
 
   img {
     width: 100px;
