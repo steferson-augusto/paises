@@ -20,12 +20,9 @@ export interface Page {
 export interface Data {
   title: string
   key: string
-  content: string
   pages?: Page[]
 }
 
-const data: Data[] = [
-  irlanda,
-]
+const data: Data[] = [irlanda]
 
 export default data

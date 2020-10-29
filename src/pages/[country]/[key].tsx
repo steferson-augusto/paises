@@ -64,7 +64,7 @@ export default function Irlanda({
 export const getStaticPaths: GetStaticPaths = async () => {
   // const paths = data.pages.map(({ key }) => ({ params: { key } }))
   const paths = []
-  data.map(({ key: country, pages }) =>
+  data.forEach(({ key: country, pages }) =>
     pages.map(({ key }) => {
       paths.push({ params: { country, key } })
     })
@@ -81,11 +81,9 @@ export const getStaticProps: GetStaticProps = async context => {
 
   const nation = data.find(land => land.key === country)
   const page = nation.pages.find(pag => pag.key === key)
-  const menu = nation.pages?.map(({ title, icon, key }) => ({
-    title,
-    icon,
-    key
-  }))
+  const menu = nation.pages
+    ?.map(({ title, icon, key }) => ({ title, icon, key }))
+    .filter(({ key }) => key !== 'home')
 
   return {
     props: { page, menu, title: nation.title }

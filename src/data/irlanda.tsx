@@ -5,16 +5,33 @@ import { Data } from '.'
 const irlanda: Data = {
   title: 'Irlanda',
   key: 'irlanda',
-  content: `A Irlanda, por vezes chamada (de maneira não oficial, para diferenciá-la da ilha de mesmo nome, 
-    que divide com a Irlanda do Norte) República da Irlanda é um estado soberano da Europa que ocupa cerca de 
-    cinco sextos da ilha homônima. É uma república constitucional governada como uma democracia parlamentar, 
-    com um presidente eleito para servir como chefe de Estado. Considerada um país desenvolvido, a Irlanda tem 
-    o terceiro maior Índice de Desenvolvimento Humano (IDH) do mundo, além de ótimas classificações em índices 
-    que medem o grau de democracia e liberdades como a de imprensa, econômica e política. Além da União Europeia
-    (UE), a Irlanda também é membro do Conselho da Europa, da Organização para a Cooperação e Desenvolvimento 
-    Econômico (OCDE), da Organização Mundial do Comércio (OMC) e da Organização das Nações Unidas (ONU). 
-    Sua capital é Dublin e a população do país é estimada em 4,8 milhões de habitantes.`,
   pages: [
+    {
+      key: 'home',
+      title: '',
+      icon: '',
+      content: reactElementToJSXString(
+        <div>
+          <p>
+            A Irlanda, por vezes chamada (de maneira não oficial, para
+            diferenciá-la da ilha de mesmo nome, que divide com a Irlanda do
+            Norte) República da Irlanda é um estado soberano da Europa que ocupa
+            cerca de cinco sextos da ilha homônima. É uma república
+            constitucional governada como uma democracia parlamentar, com um
+            presidente eleito para servir como chefe de Estado. Considerada um
+            país desenvolvido, a Irlanda tem o terceiro maior Índice de
+            Desenvolvimento Humano (IDH) do mundo, além de ótimas classificações
+            em índices que medem o grau de democracia e liberdades como a de
+            imprensa, econômica e política. Além da União Europeia (UE), a
+            Irlanda também é membro do Conselho da Europa, da Organização para a
+            Cooperação e Desenvolvimento Econômico (OCDE), da Organização
+            Mundial do Comércio (OMC) e da Organização das Nações Unidas (ONU).
+            Sua capital é Dublin e a população do país é estimada em 4,8 milhões
+            de habitantes.
+          </p>
+        </div>
+      )
+    },
     {
       key: 'localizacao',
       title: 'Localização',

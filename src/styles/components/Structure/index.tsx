@@ -77,8 +77,15 @@ const Structure: React.FC<StructureProps> = ({
       </Container>
 
       <Sidebar className="sidebar">
-        <Link href={`/${title.toLowerCase()}/`}>
-          <Center className="center">
+        <Link href={`/${title.toLowerCase()}/home/`}>
+          <Center
+            className={`${
+              location === `/${title.toLowerCase()}/home/`
+                ? 'center div-active'
+                : 'center'
+            }`}
+            onClick={() => handleRedirect(`/${title.toLowerCase()}/home/`)}
+          >
             <img
               src={`/images/${title.toLowerCase()}/bandeira.svg`}
               alt="bandeira"

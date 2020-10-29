@@ -119,4 +119,13 @@ export default createGlobalStyle`
       background: var(--sidebar-active);
     }
   }
+
+  .div-active {
+    background: var(--sidebar-active);
+    cursor: default;
+
+    &:hover {
+      background: var(--sidebar-active);
+    }
+  }
 `
