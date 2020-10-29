@@ -45,7 +45,7 @@ export default function Irlanda({
             <Title>{key === 'home' ? title : page.title}</Title>
             <ConditionalComponent content={page.imageTop}>
               <ContainerImages>
-                <Image src={page.imageTop} height="200" width="300" />
+                <Image src={page.imageTop} height="120" width="200" />
               </ContainerImages>
             </ConditionalComponent>
 

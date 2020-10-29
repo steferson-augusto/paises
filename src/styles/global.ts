@@ -78,7 +78,7 @@ export default createGlobalStyle`
     width: 100%;
   }
 
-  .container div p {
+  .container div p, .container div ul {
     margin: auto;
     width: 90%;
     font-size: 16px;
@@ -89,6 +89,15 @@ export default createGlobalStyle`
       background: var(--primary);
       color: #fff;
     }
+  }
+
+  .container div ul {
+    padding-left: 50px;
+  }
+
+  b::selection {
+    background: var(--primary);
+    color: #fff;
   }
 
   .container div a {
