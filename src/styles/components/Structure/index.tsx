@@ -1,11 +1,12 @@
-import { useContext } from 'react'
+import { useContext, useState, useCallback, useEffect } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import Switch from 'react-switch'
 import { ThemeContext } from 'styled-components'
 import { lighten } from 'polished'
 
-import { Page } from '../../../data'
 import { Container, Left, Sidebar, Center, Mark } from './styles'
+import { Page } from '../../../data'
 import dark from '../../themes/dark'
 import light from '../../themes/light'
 
@@ -30,7 +31,23 @@ const Structure: React.FC<StructureProps> = ({
   subtitle,
   toogleTheme
 }) => {
+  const { asPath } = useRouter()
   const { title: theme } = useContext(ThemeContext)
+  const [location, setLocation] = useState(
+    asPath.substring(0, asPath.length - 1)
+  )
+
+  useEffect(() => {
+    setLocation(asPath)
+  }, [])
+
+  const handleRedirect = useCallback(
+    href => {
+      if (href !== location) setLocation(href)
+    },
+    [location]
+  )
+
   return (
     <>
       <input type="checkbox" id="check" />
@@ -69,18 +86,20 @@ const Structure: React.FC<StructureProps> = ({
             <h4>{title}</h4>
           </Center>
         </Link>
-        {menu.map(({ title: label, icon, key }) => (
-          <Link
-            passHref
-            key={key}
-            href={`/${title.toLowerCase()}/${encodeURIComponent(key)}`}
-          >
-            <a>
-              <i className={`fas ${icon}`} />
-              <span>{label}</span>
-            </a>
-          </Link>
-        ))}
+        {menu.map(({ title: label, icon, key }) => {
+          const href = `/${title.toLowerCase()}/${encodeURIComponent(key)}/`
+          return (
+            <Link key={key} href={href} passHref>
+              <a
+                onClick={() => handleRedirect(href)}
+                className={`${href === location ? 'active' : 'link'}`}
+              >
+                <i className={`fas ${icon}`} />
+                <span>{label}</span>
+              </a>
+            </Link>
+          )
+        })}
       </Sidebar>
       <div className="content">{children}</div>
     </>

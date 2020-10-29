@@ -1,8 +1,8 @@
-import "styled-components";
+import 'styled-components'
 
-declare module "styled-components" {
+declare module 'styled-components' {
   export interface DefaultTheme {
-    title: "light" | "dark" | undefined;
+    title: 'light' | 'dark' | undefined
 
     colors: {
       text: string
@@ -13,6 +13,7 @@ declare module "styled-components" {
       sidebar: {
         background: string
         hover: string
+        active: string
       }
       surface: {
         background: string
@@ -22,6 +23,6 @@ declare module "styled-components" {
         background: string
         text: string
       }
-    };
+    }
   }
 }

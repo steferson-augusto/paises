@@ -8,6 +8,7 @@ export default createGlobalStyle`
     --secondary: ${props => props.theme.colors.secondary};
     --sidebar-bg: ${props => props.theme.colors.sidebar.background};
     --sidebar-hover: ${props => props.theme.colors.sidebar.hover};
+    --sidebar-active: ${props => props.theme.colors.sidebar.active};
     --surface-bg: ${props => props.theme.colors.surface.background};
     --surface-hover: ${props => props.theme.colors.surface.hover};
     --header-bg: ${props => props.theme.colors.header.background};
@@ -101,7 +102,21 @@ export default createGlobalStyle`
     }
   }
 
-  .selected {
-    color: '#f00';
+  .active {
+    color: var(--text-color);
+    background: var(--sidebar-active);
+    display: block;
+    width: 100%;
+    line-height: 50px;
+    text-decoration: none;
+    padding-left: 40px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    transition-property: background;
+    cursor: default;
+
+    &:hover {
+      background: var(--sidebar-active);
+    }
   }
 `

@@ -59,7 +59,7 @@ export const Sidebar = styled.div`
     margin-bottom: 20px;
   }
 
-  a {
+  .link {
     color: var(--text-color);
     display: block;
     width: 100%;
