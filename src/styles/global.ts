@@ -40,10 +40,9 @@ export default createGlobalStyle`
       a {
         font-size: 20px;
         margin-left: 190px;
-        width: 60px;
+        width: 48px;
         text-align: center;
         padding: 0;
-        padding-right: 10px;
 
         i {
           padding: 0;
@@ -126,6 +125,7 @@ export default createGlobalStyle`
     padding-left: 40px;
     box-sizing: border-box;
     transition: 0.5s;
+    border-radius: 2px;
     transition-property: background;
     cursor: default;
 
@@ -141,9 +141,5 @@ export default createGlobalStyle`
     &:hover {
       background: var(--sidebar-active);
     }
-  }
-
-  .teste {
-    position: relative;
   }
 `

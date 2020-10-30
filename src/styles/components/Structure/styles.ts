@@ -42,8 +42,7 @@ export const Left = styled.div`
 export const Sidebar = styled.div`
   background: var(--sidebar-bg);
   margin-top: 40px;
-  padding-bottom: 30px;
-  padding-top: 0px;
+  padding: 0px 2px 30px 3px;
   position: fixed;
   left: 0;
   width: 250px;
@@ -84,6 +83,7 @@ export const Sidebar = styled.div`
     line-height: 50px;
     text-decoration: none;
     padding-left: 40px;
+    border-radius: 3px;
     box-sizing: border-box;
     transition: 0.5s;
     transition-property: background;
