@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import parse from 'html-react-parser'
 
 import { Subtitle, Container, ContainerImages } from '../index'
@@ -16,14 +17,14 @@ const Topics: React.FC<TopicProps> = ({ topics }) => (
 
         <ConditionalComponent content={topic.imageTop}>
           <ContainerImages>
-            <img src={topic.imageTop} />
+            <Image src={topic.imageTop} height="120" width="200" />
           </ContainerImages>
         </ConditionalComponent>
 
         {parse(topic.content)}
         <ConditionalComponent content={topic.imageBottom}>
           <ContainerImages>
-            <img src={topic.imageBottom} />
+            <Image src={topic.imageBottom} height="120" width="200" />
           </ContainerImages>
         </ConditionalComponent>
       </Container>

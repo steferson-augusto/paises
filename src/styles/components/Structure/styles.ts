@@ -9,6 +9,7 @@ export const Container = styled.header`
   padding: 20px;
   width: 100%;
   height: 30px;
+  z-index: 1;
 `
 
 export const Mark = styled.div`

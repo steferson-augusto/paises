@@ -77,18 +77,22 @@ export default createGlobalStyle`
 
   .container {
     width: 100%;
-  }
 
-  .container div p, .container div ul {
-    margin: auto;
-    width: 90%;
-    font-size: 16px;
-    padding: 6px 20px;
-    line-height: 1.5;
+    div {
+      width: 100%;
 
-    &::selection {
-      background: var(--primary);
-      color: #fff;
+      p, ul {
+        margin: auto;
+        width: 90%;
+        font-size: 16px;
+        padding: 6px 20px;
+        line-height: 1.5;
+
+        &::selection {
+          background: var(--primary);
+          color: #fff;
+        }
+      }
     }
   }
 
@@ -137,5 +141,9 @@ export default createGlobalStyle`
     &:hover {
       background: var(--sidebar-active);
     }
+  }
+
+  .teste {
+    position: relative;
   }
 `
