@@ -13,9 +13,9 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
   await db.migrate({ force: true })
   console.log('migrate')
 
-  const users = await db.all('SELECT * FROM Users')
+  const countries = await db.all('SELECT * FROM countries')
   console.log(request.method)
-  console.log('All Users', JSON.stringify(users, null, 2))
+  console.log('All Countries', JSON.stringify(countries, null, 2))
 
-  response.json({ users })
+  response.json(countries)
 }

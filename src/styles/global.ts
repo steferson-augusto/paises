@@ -13,6 +13,12 @@ export default createGlobalStyle`
     --surface-hover: ${props => props.theme.colors.surface.hover};
     --header-bg: ${props => props.theme.colors.header.background};
     --header-text: ${props => props.theme.colors.header.text};
+    --button-primary-text: ${props => props.theme.colors.button.primary.text};
+    --button-primary-hover: ${props => props.theme.colors.button.primary.hover};
+    --button-secondary-text: ${props =>
+      props.theme.colors.button.secondary.text};
+    --button-secondary-hover: ${props =>
+      props.theme.colors.button.secondary.hover};
   }
 
   * {
@@ -72,6 +78,10 @@ export default createGlobalStyle`
     padding-top: 40px;
     height: 100vh;
     transition: 0.5s;
+  }
+
+  .without-menu {
+    margin: 0;
   }
 
   .container {

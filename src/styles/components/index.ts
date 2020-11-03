@@ -61,3 +61,26 @@ export const Redirect = styled.a`
   color: var(--primary);
   font-size: 16px;
 `
+
+export const AddButton = styled.a`
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 40px;
+  text-align: center;
+  background-color: var(--secondary);
+  color: #fff;
+  text-decoration: none;
+  position: absolute;
+  bottom: 30px;
+  margin: auto;
+`
+
+export const Form = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`

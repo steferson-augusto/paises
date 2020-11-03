@@ -53,9 +53,11 @@ const Structure: React.FC<StructureProps> = ({
       <input type="checkbox" id="check" />
       <Container>
         <Mark>
-          <label htmlFor="check">
-            <i className="fas fa-bars" id="sidebar_btn"></i>
-          </label>
+          {menu.length > 0 && (
+            <label htmlFor="check">
+              <i className="fas fa-bars" id="sidebar_btn"></i>
+            </label>
+          )}
           <Left>
             <h3>
               {title}
@@ -76,39 +78,43 @@ const Structure: React.FC<StructureProps> = ({
         />
       </Container>
 
-      <Sidebar className="sidebar">
-        <Link href={`/${title.toLowerCase()}/home/`}>
-          <Center
-            className={`${
-              location === `/${title.toLowerCase()}/home/`
-                ? 'center div-active'
-                : 'center'
-            }`}
-            onClick={() => handleRedirect(`/${title.toLowerCase()}/home/`)}
-          >
-            <img
-              src={`/images/${title.toLowerCase()}/bandeira.svg`}
-              alt="bandeira"
-            />
-            <h4>{title}</h4>
-          </Center>
-        </Link>
-        {menu.map(({ title: label, icon, key }) => {
-          const href = `/${title.toLowerCase()}/${encodeURIComponent(key)}/`
-          return (
-            <Link key={key} href={href} passHref>
-              <a
-                onClick={() => handleRedirect(href)}
-                className={`${href === location ? 'active' : 'link'}`}
-              >
-                <i className={`fas ${icon}`} />
-                <span>{label}</span>
-              </a>
-            </Link>
-          )
-        })}
-      </Sidebar>
-      <div className="content">{children}</div>
+      {menu.length > 0 && (
+        <Sidebar className="sidebar">
+          <Link href={`/${title.toLowerCase()}/home/`}>
+            <Center
+              className={`${
+                location === `/${title.toLowerCase()}/home/`
+                  ? 'center div-active'
+                  : 'center'
+              }`}
+              onClick={() => handleRedirect(`/${title.toLowerCase()}/home/`)}
+            >
+              <img
+                src={`/images/${title.toLowerCase()}/bandeira.svg`}
+                alt="bandeira"
+              />
+              <h4>{title}</h4>
+            </Center>
+          </Link>
+          {menu.map(({ title: label, icon, key }) => {
+            const href = `/${title.toLowerCase()}/${encodeURIComponent(key)}/`
+            return (
+              <Link key={key} href={href} passHref>
+                <a
+                  onClick={() => handleRedirect(href)}
+                  className={`${href === location ? 'active' : 'link'}`}
+                >
+                  <i className={`fas ${icon}`} />
+                  <span>{label}</span>
+                </a>
+              </Link>
+            )
+          })}
+        </Sidebar>
+      )}
+      <div className={`content ${menu.length === 0 ? 'without-menu' : ''}`}>
+        {children}
+      </div>
     </>
   )
 }

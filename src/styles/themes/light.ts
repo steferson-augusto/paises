@@ -1,12 +1,15 @@
-import { DefaultTheme } from 'styled-components'
+import { shade } from 'polished'
 
-const light: DefaultTheme = {
+const primary = '#5e35b1'
+const secondary = '#018786'
+
+const light = {
   title: 'light',
 
   colors: {
     text: '#333',
-    primary: '#5e35b1',
-    secondary: '#03DAC6',
+    primary: primary,
+    secondary: '#018786',
 
     background: '#f5f5f5',
     sidebar: {
@@ -19,8 +22,18 @@ const light: DefaultTheme = {
       hover: '#C5C5C5'
     },
     header: {
-      background: '#5e35b1',
+      background: primary,
       text: '#E1E1E6'
+    },
+    button: {
+      primary: {
+        text: '#f5f5f5',
+        hover: shade(0.3, primary)
+      },
+      secondary: {
+        text: '#f5f5f5',
+        hover: shade(0.3, secondary)
+      }
     }
   }
 }
