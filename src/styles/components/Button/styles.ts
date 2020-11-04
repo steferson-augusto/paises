@@ -2,7 +2,8 @@ import { ButtonHTMLAttributes } from 'react'
 import styled from 'styled-components'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  primary: boolean
+  primary?: boolean
+  icon?: string
 }
 
 export const Container = styled.button<ButtonProps>`
@@ -16,6 +17,7 @@ export const Container = styled.button<ButtonProps>`
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 1px;
+  cursor: pointer;
 
   overflow: hidden;
 

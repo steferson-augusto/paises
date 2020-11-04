@@ -14,6 +14,7 @@ export const Close = styled.a`
   color: #8d0000;
   text-decoration: none;
   z-index: 99999;
+  cursor: pointer;
 `
 
 export const Container = styled.div`
@@ -25,16 +26,16 @@ export const Container = styled.div`
   font-family: Arial, Helvetica, sans-serif;
   background: rgba(0, 0, 0, 0.8);
   z-index: 99998;
-  opacity: 0;
+  opacity: 1;
   -webkit-transition: opacity 400ms ease-in;
   -moz-transition: opacity 400ms ease-in;
   transition: opacity 400ms ease-in;
-  pointer-events: none;
+  pointer-events: auto;
 
-  &:target {
+  /* &:target {
     opacity: 1;
     pointer-events: auto;
-  }
+  } */
 
   .modal-body {
     width: 400px;

@@ -76,6 +76,7 @@ export const AddButton = styled.a`
   position: absolute;
   bottom: 30px;
   margin: auto;
+  cursor: pointer;
 `
 
 export const Form = styled.form`

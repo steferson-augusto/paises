@@ -1,5 +1,5 @@
 export interface Country {
-  id: number
+  id?: number
   slug: string
   title: string
   countPages?: number
