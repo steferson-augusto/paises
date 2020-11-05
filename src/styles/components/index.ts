@@ -78,6 +78,11 @@ export const AddButton = styled.a`
   bottom: 30px;
   margin: auto;
   cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+  &:hover {
+    background-color: ${({ theme }) => darken(0.1, theme.colors.secondary)};
+  }
 `
 
 export const Form = styled.form`
