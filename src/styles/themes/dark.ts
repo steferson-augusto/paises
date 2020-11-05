@@ -10,6 +10,7 @@ const dark = {
     text: '#E1E1E6',
     primary: primary,
     secondary: secondary,
+    error: '#CF6679',
 
     background: '#121212',
     sidebar: {

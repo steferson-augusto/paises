@@ -1,6 +1,16 @@
 import styled from 'styled-components'
 
-export const InputField = styled.div`
+interface InputProps {
+  error: boolean
+}
+
+export const Message = styled.p<InputProps>`
+  font-size: 12px;
+  color: var(--${({ error }) => (error ? 'error' : 'text-color')});
+  margin-top: 3px;
+`
+
+export const InputField = styled.div<InputProps>`
   width: 100%;
   max-width: 300px;
   position: relative;
@@ -20,7 +30,8 @@ export const InputField = styled.div`
 
     &:valid,
     &:focus {
-      border-bottom: 2px solid var(--primary);
+      border-bottom: 2px solid
+        var(--${({ error }) => (error ? 'error' : 'primary')});
     }
   }
 
@@ -43,7 +54,7 @@ export const InputField = styled.div`
 
   input:valid + label,
   input:focus + label {
-    color: var(--primary);
+    color: var(--${({ error }) => (error ? 'error' : 'primary')});
     font-size: 0.8rem;
     top: -30px;
     pointer-events: none;

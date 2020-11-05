@@ -6,6 +6,7 @@ export default createGlobalStyle`
     --text-color: ${props => props.theme.colors.text};
     --primary: ${props => props.theme.colors.primary};
     --secondary: ${props => props.theme.colors.secondary};
+    --error: ${props => props.theme.colors.error};
     --sidebar-bg: ${props => props.theme.colors.sidebar.background};
     --sidebar-hover: ${props => props.theme.colors.sidebar.hover};
     --sidebar-active: ${props => props.theme.colors.sidebar.active};

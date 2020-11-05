@@ -3,6 +3,7 @@ import { Container, Close } from './styles'
 
 export interface ModalProps {
   openModal: () => void
+  closeModal: () => void
 }
 
 interface Props {
@@ -19,17 +20,17 @@ const Modal: React.ForwardRefRenderFunction<ModalProps, Props> = (
     setVisible(true)
   }, [visible])
 
-  useImperativeHandle(ref, () => ({ openModal }))
-
-  const handleCloseModal = useCallback(() => {
+  const closeModal = useCallback(() => {
     setVisible(false)
   }, [visible])
+
+  useImperativeHandle(ref, () => ({ openModal, closeModal }))
 
   if (!visible) return null
 
   return (
     <Container>
-      <Close onClick={handleCloseModal}>x</Close>
+      <Close onClick={closeModal}>x</Close>
       {children}
     </Container>
   )

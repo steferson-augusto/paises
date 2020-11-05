@@ -10,6 +10,7 @@ const light = {
     text: '#333',
     primary: primary,
     secondary: '#018786',
+    error: '#b00020',
 
     background: '#f5f5f5',
     sidebar: {

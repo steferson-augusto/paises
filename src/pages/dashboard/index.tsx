@@ -1,5 +1,5 @@
 /* eslint-disable multiline-ternary */
-import { FormEvent, useCallback, useRef } from 'react'
+import { FormEvent, useCallback, useRef, useState } from 'react'
 import Head from 'next/head'
 import axios from 'axios'
 
@@ -17,6 +17,7 @@ interface Props {
 }
 
 const Create: React.FC<Props> = ({ toogleTheme }) => {
+  const [errorMessage, setErrorMessage] = useState('')
   const { data, error, loading, mutate } = useSWR<Country[]>('/api/teste')
   const countryInputRef = useRef<HTMLInputElement>(null)
   const modalRef = useRef<ModalProps>(null)
@@ -34,13 +35,15 @@ const Create: React.FC<Props> = ({ toogleTheme }) => {
       const exists = data.some(country => country.slug === slug)
 
       if (exists) {
-        console.log('Já existe')
+        setErrorMessage('Este país já foi adicionado')
       } else {
+        setErrorMessage('')
         const values = { title, slug }
         // axios.post('/api/teste/', values)
 
         mutate([...data, values], false)
-        // countryInputRef.current.value = ''
+        modalRef.current?.closeModal()
+        countryInputRef.current.value = ''
       }
     },
     [data]
@@ -80,6 +83,8 @@ const Create: React.FC<Props> = ({ toogleTheme }) => {
                       label="País"
                       type="text"
                       pattern=".+"
+                      error={errorMessage.length > 0}
+                      message={errorMessage}
                       required
                     />
                     <Button primary={true} icon="plus" type="submit">
