@@ -14,7 +14,7 @@ const Modal: React.ForwardRefRenderFunction<ModalProps, Props> = (
   { children },
   ref
 ) => {
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(false)
 
   const openModal = useCallback(() => {
     setVisible(true)
