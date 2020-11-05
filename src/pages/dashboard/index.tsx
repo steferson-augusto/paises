@@ -18,7 +18,7 @@ interface Props {
 
 const Create: React.FC<Props> = ({ toogleTheme }) => {
   const [errorMessage, setErrorMessage] = useState('')
-  const { data, error, loading, mutate } = useSWR<Country[]>('/api/teste')
+  const { data, error, loading, mutate } = useSWR<Country[]>('/api/country')
   const countryInputRef = useRef<HTMLInputElement>(null)
   const modalRef = useRef<ModalProps>(null)
 
@@ -39,7 +39,7 @@ const Create: React.FC<Props> = ({ toogleTheme }) => {
       } else {
         setErrorMessage('')
         const values = { title, slug }
-        // axios.post('/api/teste/', values)
+        axios.post('/api/country/', values)
 
         mutate([...data, values], false)
         modalRef.current?.closeModal()
