@@ -4,6 +4,7 @@ export const Container = styled.div`
   width: 90%;
   max-height: calc(100vh - 120px);
   overflow-y: scroll;
+  padding-left: 10px;
 `
 
 export const Country = styled.div`

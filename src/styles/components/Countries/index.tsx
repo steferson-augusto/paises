@@ -45,7 +45,7 @@ const Countries: React.FC<CountriesProps> = ({ countries, error, loading }) => {
   if (loading) return <p>carregando...</p>
   if (countries.length === 0) return <p>Sem conteúdo</p>
   return (
-    <Container>
+    <Container className="custom-scrollbar">
       {countries.map(({ title, slug }) => (
         <Country key={slug}>
           <Image src={`/images/${slug}/bandeira.svg`} width="70" height="40" />
