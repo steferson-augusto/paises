@@ -153,4 +153,21 @@ export default createGlobalStyle`
       background: var(--sidebar-active);
     }
   }
+
+  .custom-scrollbar {
+    &::-webkit-scrollbar {
+      width: 10px;
+      background: var(--bg-color);
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 10px 10px var(--bg-color);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      box-shadow: inset 0 0 10px 10px var(--surface-bg);
+      border: solid 2px transparent;
+      border-radius: 10px;
+    }
+  }
 `
