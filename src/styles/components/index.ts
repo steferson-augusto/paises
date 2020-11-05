@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { darken } from 'polished'
 
 export const Body = styled.div`
   width: 100%;
@@ -84,4 +85,32 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+`
+
+export interface IconButtonProps {
+  color?: string
+}
+
+export const IconButton = styled.a<IconButtonProps>`
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 30px;
+  text-align: center;
+  background-color: ${({ color }) =>
+    color.length > 0 ? color : 'var(--primary)'};
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0px 3px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+  &:hover {
+    background-color: ${({ color, theme }) =>
+      color.length > 0
+        ? darken(0.15, color)
+        : darken(0.15, theme.colors.primary)};
+  }
 `

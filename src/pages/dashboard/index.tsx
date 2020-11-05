@@ -58,6 +58,7 @@ const Create: React.FC<Props> = ({ toogleTheme }) => {
       <main>
         <Structure title="Dashboard" menu={[]} toogleTheme={toogleTheme}>
           <Body>
+            <h2>Países</h2>
             <Countries countries={data} error={error} loading={loading} />
 
             <AddButton onClick={handleOpenModal}>
