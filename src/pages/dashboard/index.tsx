@@ -5,7 +5,7 @@ import axios from 'axios'
 
 import useSWR from '../../hooks/useSWR'
 import { AddButton, Body, Container, Form } from '../../styles/components'
-import Input from '../../styles/components/Input'
+import Input from '../../styles/components/InputRef'
 import Structure from '../../styles/components/Structure'
 import replaceSpecialChars from '../../utils/replaceSpecialChars'
 import Countries, { Country } from '../../styles/components/Countries'

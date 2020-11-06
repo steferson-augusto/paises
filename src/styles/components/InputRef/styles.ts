@@ -14,7 +14,7 @@ export const InputField = styled.div<InputProps>`
   width: 100%;
   max-width: 300px;
   position: relative;
-  margin-top: 30px;
+  margin-top: 15px;
 
   input {
     color: var(--text-color);
@@ -55,13 +55,6 @@ export const InputField = styled.div<InputProps>`
   input:valid + label,
   input:focus + label {
     color: var(--${({ error }) => (error ? 'error' : 'primary')});
-    font-size: 0.8rem;
-    top: -30px;
-    pointer-events: none;
-  }
-
-  input:disabled + label {
-    color: #616161;
     font-size: 0.8rem;
     top: -30px;
     pointer-events: none;

@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react'
+import { forwardRef, InputHTMLAttributes } from 'react'
 import { InputField, Message } from './styles'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -8,16 +8,13 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   message: string
 }
 
-const Input: React.FC<Props> = ({
-  name,
-  label,
-  error,
-  message = '',
-  ...rest
-}) => {
+const Input: React.ForwardRefRenderFunction<HTMLInputElement, Props> = (
+  { name, label, error, message = '', ...rest },
+  ref
+) => {
   return (
     <InputField error={error}>
-      <input id={name} {...rest} />
+      <input id={name} {...rest} ref={ref} />
       <label htmlFor={name}>{label}</label>
 
       {message.length > 0 && <Message error={error}>{message}</Message>}
@@ -25,4 +22,4 @@ const Input: React.FC<Props> = ({
   )
 }
 
-export default Input
+export default forwardRef(Input)

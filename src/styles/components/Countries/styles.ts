@@ -9,11 +9,10 @@ export const Container = styled.div`
 
 export const Country = styled.div`
   width: 100%;
-  height: 50px;
   display: flex;
   align-items: center;
   padding: 5px;
-  border-radius: 5px;
+  border-radius: 3px;
   margin: 3px 0px;
   background-color: var(--surface-bg);
 
@@ -47,5 +46,12 @@ export const Pages = styled.p<SlugProps>`
 export const ContainerButtons = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+`
+
+export const ModalContent = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 `
