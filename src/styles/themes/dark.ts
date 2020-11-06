@@ -20,7 +20,7 @@ const dark = {
     },
     surface: {
       background: '#1F1F1F',
-      hover: '#222'
+      hover: '#333'
     },
     header: {
       background: '#1F1F1F',

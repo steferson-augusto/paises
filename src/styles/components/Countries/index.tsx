@@ -18,7 +18,6 @@ import {
 } from './styles'
 import replaceSpecialChars from '../../../utils/replaceSpecialChars'
 import Button from '../Button'
-import country from '../../../pages/api/country'
 
 export interface Country {
   id?: number
