@@ -1,6 +1,8 @@
 /* eslint-disable indent */
 import Image from 'next/image'
 import { useCallback, useRef, useState } from 'react'
+import axios from 'axios'
+import { mutate } from 'swr'
 
 import { IconButton } from '..'
 import Modal, { ModalProps } from '../Modal'
@@ -16,6 +18,7 @@ import {
 } from './styles'
 import replaceSpecialChars from '../../../utils/replaceSpecialChars'
 import Button from '../Button'
+import country from '../../../pages/api/country'
 
 export interface Country {
   id?: number
@@ -55,15 +58,23 @@ const Countries: React.FC<CountriesProps> = ({ countries, error, loading }) => {
     e =>
       setValues(prev => {
         const title = e.target.value
-        const slug = replaceSpecialChars(title)
+        const slug = replaceSpecialChars(title.toLowerCase())
         return { ...prev, title, slug }
       }),
     []
   )
 
   const handleSaveEdition = useCallback(() => {
-    console.log(values)
-  }, [values])
+    if (values?.id) {
+      axios.put('/api/country/', values)
+      const updatedCountries = countries?.map(country => {
+        if (country.id === values?.id) return values
+        return country
+      })
+      mutate('/api/country', updatedCountries, false)
+      modalRef.current.closeModal()
+    }
+  }, [values, countries])
 
   if (error) return <p>falha na requisição</p>
   if (loading) return <p>carregando...</p>
