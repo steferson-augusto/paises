@@ -8,30 +8,37 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     filename: './database.sqlite',
     driver: sqlite3.cached.Database
   })
-  console.log('criate')
 
   switch (request.method) {
     case 'GET': {
       const countries = await db.all('SELECT * FROM countries')
       console.log('All Countries', JSON.stringify(countries, null, 2))
 
-      response.json(countries)
-      break
+      return response.json(countries)
     }
     case 'POST': {
-      console.log('POOOOOOOOOOST')
       const { title, slug } = request.body
       const statement = await db.prepare(
         'INSERT INTO countries (slug, title) VALUES (?, ?)'
       )
       const result = await statement.run(slug, title)
-      const values = await result.stmt.finalize()
-      console.log(values)
-      response.status(201).json({ message: 'Adicionado' })
-      break
+      await result.stmt.finalize()
+
+      return response.status(201).json({ message: 'Adicionado' })
+    }
+    case 'PUT': {
+      const { title, slug, id } = request.body
+      const statement = await db.prepare(
+        'UPDATE countries SET slug = ?, title = ? WHERE id = ?'
+      )
+      const result = await statement.run(slug, title, id)
+      await result.stmt.finalize()
+
+      return response.status(200).json({ message: 'Atualizado' })
     }
     default:
-      response.json({ message: 'Apenas métodos GET e POST são aceitos' })
-      break
+      return response.json({
+        message: 'Apenas métodos GET, POST e PUT são aceitos'
+      })
   }
 }
