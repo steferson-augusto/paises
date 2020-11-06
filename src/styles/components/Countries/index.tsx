@@ -75,6 +75,17 @@ const Countries: React.FC<CountriesProps> = ({ countries, error, loading }) => {
     }
   }, [values, countries])
 
+  const handleDelete = useCallback(
+    (id: number) => {
+      if (id) {
+        axios.delete('/api/country/', { params: { id } })
+        const updatedCountries = countries.filter(country => country.id !== id)
+        mutate('/api/country', updatedCountries, false)
+      }
+    },
+    [countries]
+  )
+
   if (error) return <p>falha na requisição</p>
   if (loading) return <p>carregando...</p>
   if (countries.length === 0) return <p>Sem conteúdo</p>
@@ -88,15 +99,17 @@ const Countries: React.FC<CountriesProps> = ({ countries, error, loading }) => {
             <Slug count={3} />
           </Content>
           <ContainerButtons>
+            <IconButton color="#3f51b5">
+              <i className="fa fa-sitemap" />
+            </IconButton>
             <IconButton
               color="#fbc02d"
               onClick={() => handleOpenModal({ id, title, slug })}
             >
               <i className="fa fa-pen" />
             </IconButton>
-
-            <IconButton color="#3f51b5">
-              <i className="fa fa-sitemap" />
+            <IconButton color="#d32f2f" onClick={() => handleDelete(id)}>
+              <i className="fa fa-trash" />
             </IconButton>
           </ContainerButtons>
         </Country>

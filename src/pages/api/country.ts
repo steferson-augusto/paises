@@ -36,9 +36,17 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
 
       return response.status(200).json({ message: 'Atualizado' })
     }
+    case 'DELETE': {
+      const { id } = request.query
+      const statement = await db.prepare('DELETE FROM countries WHERE id = ?')
+      const result = await statement.run(id)
+      await result.stmt.finalize()
+
+      return response.status(200).json({ message: 'Deletado' })
+    }
     default:
       return response.json({
-        message: 'Apenas métodos GET, POST e PUT são aceitos'
+        message: 'Apenas métodos GET, POST, PUT e DELETE são aceitos'
       })
   }
 }

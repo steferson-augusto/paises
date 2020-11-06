@@ -4,7 +4,8 @@ export const Container = styled.div`
   width: 90%;
   max-height: calc(100vh - 120px);
   overflow-y: scroll;
-  padding-left: 10px;
+  padding: 20px;
+  padding-left: 30px;
 `
 
 export const Country = styled.div`
@@ -13,8 +14,10 @@ export const Country = styled.div`
   align-items: center;
   padding: 5px;
   border-radius: 3px;
-  margin: 3px 0px;
+  margin: 10px 0px;
   background-color: var(--surface-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   &:hover {
     background-color: var(--surface-hover);
