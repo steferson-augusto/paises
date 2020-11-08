@@ -3,6 +3,30 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { open } from 'sqlite'
 import sqlite3 from 'sqlite3'
 
+export const findAll = async () => {
+  const db = await open({
+    filename: './database.sqlite',
+    driver: sqlite3.cached.Database
+  })
+
+  const countries = await db.all(
+    'SELECT *, (SELECT COUNT(*) FROM pages WHERE pages.countryId = countries.id) as countPages FROM countries'
+  )
+  return countries
+}
+
+export const findBySlug = async (slug = '') => {
+  const db = await open({
+    filename: './database.sqlite',
+    driver: sqlite3.cached.Database
+  })
+
+  const [country] = await db.all(
+    `SELECT * FROM countries WHERE slug = "${slug}"`
+  )
+  return country
+}
+
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   const db = await open({
     filename: './database.sqlite',
@@ -11,8 +35,14 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
 
   switch (request.method) {
     case 'GET': {
-      const countries = await db.all('SELECT * FROM countries')
-      console.log('All Countries', JSON.stringify(countries, null, 2))
+      // const { slug } = request.query
+
+      // if (slug) {
+      //   const country = await findBySlug(slug as string)
+      //   return response.json(country)
+      // }
+      const countries = await findAll()
+      // console.log('All Countries', JSON.stringify(countries, null, 2))
 
       return response.json(countries)
     }

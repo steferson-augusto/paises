@@ -18,6 +18,7 @@ import {
 } from './styles'
 import replaceSpecialChars from '../../../utils/replaceSpecialChars'
 import Button from '../Button'
+import Link from 'next/link'
 
 export interface Country {
   id?: number
@@ -38,7 +39,7 @@ const Slug: React.FC<SlugProps> = ({ count }) => {
       {count === 0
         ? 'sem páginas'
         : count === 1
-        ? `${count} páginas`
+        ? `${count} página`
         : `${count} páginas`}
     </Pages>
   )
@@ -91,17 +92,19 @@ const Countries: React.FC<CountriesProps> = ({ countries, error, loading }) => {
   if (countries.length === 0) return <p>Sem conteúdo</p>
   return (
     <Container className="custom-scrollbar">
-      {countries.map(({ title, slug, id }) => (
+      {countries.map(({ title, slug, id, countPages }) => (
         <Country key={slug}>
           <Image src={`/images/${slug}/bandeira.svg`} width="70" height="40" />
           <Content>
             <h3>{title}</h3>
-            <Slug count={3} />
+            <Slug count={countPages} />
           </Content>
           <ContainerButtons>
-            <IconButton color="#3f51b5">
-              <i className="fa fa-sitemap" />
-            </IconButton>
+            <Link href={`/dashboard/${slug}`}>
+              <IconButton color="#3f51b5">
+                <i className="fa fa-sitemap" />
+              </IconButton>
+            </Link>
             <IconButton
               color="#fbc02d"
               onClick={() => handleOpenModal({ id, title, slug })}

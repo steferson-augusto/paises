@@ -2,8 +2,8 @@
 import { FormEvent, useCallback, useRef, useState } from 'react'
 import Head from 'next/head'
 import axios from 'axios'
-
 import useSWR from '../../hooks/useSWR'
+
 import { AddButton, Body, Container, Form } from '../../styles/components'
 import Input from '../../styles/components/InputRef'
 import Structure from '../../styles/components/Structure'
