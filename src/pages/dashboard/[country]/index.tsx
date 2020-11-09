@@ -1,8 +1,11 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 // import axios from 'axios'
 import useSWR from '../../../hooks/useSWR'
+// import { CKEditor } from '@ckeditor/ckeditor5-react'
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import dynamic from 'next/dynamic'
 
 import { AddButton, Body } from '../../../styles/components'
 import Structure from '../../../styles/components/Structure'
@@ -14,9 +17,14 @@ import Input from '../../../styles/components/InputRef'
 import InputState from '../../../styles/components/Input'
 import {
   ContainerIcon,
-  ContainerTitle
+  ContainerContent
 } from '../../../styles/components/[country]'
 import replaceSpecialChars from '../../../utils/replaceSpecialChars'
+import Checkbox from '../../../styles/components/Checkbox'
+
+const Editor = dynamic(() => import('../../../styles/components/CKEditor'), {
+  ssr: false
+})
 
 interface Props {
   country: Country
@@ -30,7 +38,11 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
   const modalRef = useRef<ModalProps>(null)
   const subtitleInputRef = useRef<HTMLInputElement>(null)
   const slugInputRef = useRef<HTMLInputElement>(null)
+  const imgTopHeightInputRef = useRef<HTMLInputElement>(null)
+  const imgTopWidthInputRef = useRef<HTMLInputElement>(null)
+  const contentRef = useRef({ value: '' })
   const [icon, setIcon] = useState('')
+  const [imageTop, setImageTop] = useState(false)
 
   const handleSubtitleChange = useCallback(() => {
     const subtitle = subtitleInputRef.current?.value?.toLowerCase()
@@ -43,6 +55,19 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
 
   const handleOpenModal = useCallback(() => {
     modalRef.current?.openModal()
+  }, [])
+
+  const handleChangeTopImage = useCallback(() => {
+    console.log(contentRef.current.value)
+    if (imageTop) {
+      imgTopWidthInputRef.current.value = ''
+      imgTopHeightInputRef.current.value = ''
+    }
+    setImageTop(prev => !prev)
+  }, [])
+
+  const handleContentChange = useCallback((event, editor) => {
+    contentRef.current.value = editor.getData()
   }, [])
 
   return (
@@ -65,7 +90,7 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
             </AddButton>
           </Body>
           <FullModal ref={modalRef} title="ADICIONAR PÁGINA">
-            <ContainerTitle>
+            <ContainerContent>
               <Input
                 ref={subtitleInputRef}
                 name="subtitle"
@@ -106,7 +131,36 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
                   required
                 />
               </ContainerIcon>
-            </ContainerTitle>
+            </ContainerContent>
+            <ContainerContent>
+              <Checkbox
+                title="Imagem Superior"
+                onChange={handleChangeTopImage}
+                checked={imageTop}
+              />
+              <Input
+                ref={imgTopWidthInputRef}
+                name="imgtop-width"
+                label="Largura"
+                type="number"
+                pattern=".+"
+                error={false}
+                message=""
+                disabled={!imageTop}
+              />
+              <Input
+                ref={imgTopHeightInputRef}
+                name="imgtop-height"
+                label="Altura"
+                type="number"
+                pattern=".+"
+                error={false}
+                message=""
+                disabled={!imageTop}
+              />
+            </ContainerContent>
+
+            <Editor handleChange={handleContentChange} />
           </FullModal>
         </Structure>
       </main>
