@@ -1,14 +1,15 @@
-import { useEffect } from 'react'
+import { useCallback, useRef } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
-import axios from 'axios'
+// import axios from 'axios'
 import useSWR from '../../../hooks/useSWR'
 
-import { Body } from '../../../styles/components'
+import { AddButton, Body } from '../../../styles/components'
 import Structure from '../../../styles/components/Structure'
 import { findAll, findBySlug } from '../../api/country'
 import { Country } from '../../../styles/components/Countries'
 import Pages, { Page } from '../../../styles/components/Pages'
+import FullModal, { ModalProps } from '../../../styles/components/FullModal'
 
 interface Props {
   country: Country
@@ -19,6 +20,11 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
   const { data, error, loading } = useSWR<Page[]>(
     `/api/page?country=${country.id}`
   )
+  const modalRef = useRef<ModalProps>(null)
+
+  const handleOpenModal = useCallback(() => {
+    modalRef.current?.openModal()
+  }, [])
 
   return (
     <div>
@@ -34,7 +40,14 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
         >
           <Body>
             <Pages pages={data} loading={loading} error={error} />
+
+            <AddButton onClick={() => handleOpenModal()}>
+              <i className="fas fa-plus" />
+            </AddButton>
           </Body>
+          <FullModal ref={modalRef} title="ADICIONAR PÁGINA">
+            <p>modal</p>
+          </FullModal>
         </Structure>
       </main>
     </div>

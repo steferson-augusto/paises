@@ -4,7 +4,6 @@ import { useCallback } from 'react'
 import { mutate } from 'swr'
 
 import { IconButton } from '..'
-// import Modal, { ModalProps } from '../Modal'
 // import Input from '../Input'
 import {
   Container,
