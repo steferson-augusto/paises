@@ -26,7 +26,7 @@ export const InputField = styled.div<InputProps>`
     outline: none;
     transition: 0.2s ease-in-out;
     box-sizing: border-box;
-    background: var(--bg-color);
+    background: transparent;
 
     &:valid,
     &:focus {

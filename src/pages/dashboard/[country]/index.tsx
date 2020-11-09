@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 // import axios from 'axios'
@@ -10,6 +10,13 @@ import { findAll, findBySlug } from '../../api/country'
 import { Country } from '../../../styles/components/Countries'
 import Pages, { Page } from '../../../styles/components/Pages'
 import FullModal, { ModalProps } from '../../../styles/components/FullModal'
+import Input from '../../../styles/components/InputRef'
+import InputState from '../../../styles/components/Input'
+import {
+  ContainerIcon,
+  ContainerTitle
+} from '../../../styles/components/[country]'
+import replaceSpecialChars from '../../../utils/replaceSpecialChars'
 
 interface Props {
   country: Country
@@ -21,6 +28,18 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
     `/api/page?country=${country.id}`
   )
   const modalRef = useRef<ModalProps>(null)
+  const subtitleInputRef = useRef<HTMLInputElement>(null)
+  const slugInputRef = useRef<HTMLInputElement>(null)
+  const [icon, setIcon] = useState('')
+
+  const handleSubtitleChange = useCallback(() => {
+    const subtitle = subtitleInputRef.current?.value?.toLowerCase()
+    slugInputRef.current.value = replaceSpecialChars(subtitle)
+  }, [subtitleInputRef.current?.value])
+
+  const handleIconChange = useCallback(e => {
+    setIcon(e.target.value)
+  }, [])
 
   const handleOpenModal = useCallback(() => {
     modalRef.current?.openModal()
@@ -46,7 +65,48 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
             </AddButton>
           </Body>
           <FullModal ref={modalRef} title="ADICIONAR PÁGINA">
-            <p>modal</p>
+            <ContainerTitle>
+              <Input
+                ref={subtitleInputRef}
+                name="subtitle"
+                label="Título"
+                type="text"
+                pattern=".+"
+                error={false}
+                message=""
+                onChange={handleSubtitleChange}
+                required
+              />
+              <Input
+                ref={slugInputRef}
+                name="slug"
+                label="Slug"
+                type="text"
+                pattern=".+"
+                error={false}
+                message=""
+                required
+                disabled
+              />
+              <ContainerIcon>
+                <i
+                  className={`fa fa-${
+                    icon.length ? icon : 'exclamation-triangle'
+                  }`}
+                />
+                <InputState
+                  name="icon"
+                  label="Ícone"
+                  type="text"
+                  pattern=".+"
+                  value={icon}
+                  onChange={handleIconChange}
+                  error={false}
+                  message=""
+                  required
+                />
+              </ContainerIcon>
+            </ContainerTitle>
           </FullModal>
         </Structure>
       </main>
