@@ -85,8 +85,10 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       return response.status(201).json({ message: 'Editado' })
     }
     case 'DELETE': {
-      // const { id } = request.query
-      console.log('delete')
+      const { id } = request.query
+      const statement = await db.prepare('DELETE FROM pages WHERE id = ?')
+      const result = await statement.run(id)
+      await result.stmt.finalize()
 
       return response.status(200).json({ message: 'Apagado' })
     }

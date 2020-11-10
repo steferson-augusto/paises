@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import { useCallback } from 'react'
-// import axios from 'axios'
+import axios from 'axios'
 import { mutate } from 'swr'
 
 import { IconButton } from '..'
@@ -43,6 +43,7 @@ export interface Page {
 
 interface PagesProps {
   pages: Page[]
+  country: number
   error: any
   loading: boolean
 }
@@ -59,7 +60,7 @@ const Slug: React.FC<SlugProps> = ({ count }) => {
   )
 }
 
-const Pages: React.FC<PagesProps> = ({ pages, error, loading }) => {
+const Pages: React.FC<PagesProps> = ({ pages, error, loading, country }) => {
   // const [values, setValues] = useState<Page>(null)
   // const modalRef = useRef<ModalProps>(null)
 
@@ -93,9 +94,9 @@ const Pages: React.FC<PagesProps> = ({ pages, error, loading }) => {
   const handleDelete = useCallback(
     (id: number) => {
       if (id) {
-        // axios.delete('/api/country/', { params: { id } })
-        const updatedCountries = pages.filter(page => page.id !== id)
-        mutate(`/api/page?country=${id}`, updatedCountries, false)
+        axios.delete('/api/page/', { params: { id } })
+        const updatedPages = pages.filter(page => page.id !== id)
+        mutate(`/api/page?country=${country}`, updatedPages, false)
       }
     },
     [pages]

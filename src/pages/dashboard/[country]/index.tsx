@@ -151,7 +151,12 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
           toogleTheme={toogleTheme}
         >
           <Body>
-            <Pages pages={data} loading={loading} error={error} />
+            <Pages
+              pages={data}
+              country={country.id}
+              loading={loading}
+              error={error}
+            />
 
             <AddButton onClick={() => handleOpenModal()}>
               <i className="fas fa-plus" />
