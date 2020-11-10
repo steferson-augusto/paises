@@ -1,3 +1,4 @@
+import { useCallback, useState } from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import '@ckeditor/ckeditor5-build-classic/build/translations/pt-br'
@@ -5,15 +6,25 @@ import '@ckeditor/ckeditor5-build-classic/build/translations/pt-br'
 import { Container } from './styles'
 
 interface EditorProps {
-  handleChange: (event: any, editor: any) => void
+  data: string
+  handleChange: (value: string) => void
 }
 
-const Editor: React.FC<EditorProps> = ({ handleChange }) => {
+const Editor: React.FC<EditorProps> = ({ data, handleChange }) => {
+  // const [data, setData] = useState('')
+
+  const handleEditorChange = useCallback((event, editor) => {
+    const value = editor.getData()
+    // setData(value)
+    handleChange(value)
+  }, [])
+
   return (
     <Container>
       <CKEditor
         editor={ClassicEditor}
-        onChange={handleChange}
+        data={data}
+        onChange={handleEditorChange}
         config={{
           toolbar: [
             'bold',

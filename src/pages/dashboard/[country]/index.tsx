@@ -1,10 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
-// import axios from 'axios'
+import axios from 'axios'
 import useSWR from '../../../hooks/useSWR'
-// import { CKEditor } from '@ckeditor/ckeditor5-react'
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import dynamic from 'next/dynamic'
 
 import { AddButton, Body } from '../../../styles/components'
@@ -34,7 +32,7 @@ interface Props {
 }
 
 const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
-  const { data, error, loading } = useSWR<Page[]>(
+  const { data, error, loading, mutate } = useSWR<Page[]>(
     `/api/page?country=${country.id}`
   )
   const modalRef = useRef<ModalProps>(null)
@@ -51,6 +49,29 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
   const [imageTop, setImageTop] = useState(false)
   const [imageBottom, setImageBottom] = useState(false)
 
+  const resetImageTop = useCallback(() => {
+    imgTopWidthInputRef.current.value = ''
+    imgTopHeightInputRef.current.value = ''
+    imgTopPathInputRef.current.value = ''
+  }, [])
+
+  const resetImageBottom = useCallback(() => {
+    imgBottomWidthInputRef.current.value = ''
+    imgBottomHeightInputRef.current.value = ''
+    imgBottomPathInputRef.current.value = ''
+  }, [])
+
+  const resetForm = useCallback(() => {
+    resetImageBottom()
+    resetImageTop()
+    setImageBottom(false)
+    setImageTop(false)
+    subtitleInputRef.current.value = ''
+    slugInputRef.current.value = ''
+    contentRef.current.value = ''
+    setIcon('')
+  }, [])
+
   const handleSubtitleChange = useCallback(() => {
     const subtitle = subtitleInputRef.current?.value?.toLowerCase()
     slugInputRef.current.value = replaceSpecialChars(subtitle)
@@ -65,25 +86,17 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
   }, [])
 
   const handleChangeTopImage = useCallback(() => {
-    if (imageTop) {
-      imgTopWidthInputRef.current.value = ''
-      imgTopHeightInputRef.current.value = ''
-      imgTopPathInputRef.current.value = ''
-    }
+    if (imageTop) resetImageTop()
     setImageTop(prev => !prev)
   }, [imageTop])
 
   const handleChangeBottomImage = useCallback(() => {
-    if (imageBottom) {
-      imgBottomWidthInputRef.current.value = ''
-      imgBottomHeightInputRef.current.value = ''
-      imgBottomPathInputRef.current.value = ''
-    }
+    if (imageBottom) resetImageBottom()
     setImageBottom(prev => !prev)
   }, [imageBottom])
 
-  const handleContentChange = useCallback((event, editor) => {
-    contentRef.current.value = editor.getData()
+  const handleContentChange = useCallback(value => {
+    contentRef.current.value = value
   }, [])
 
   const handleSubmit = useCallback(
@@ -116,9 +129,13 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
         }
       }
 
-      console.log(value)
+      axios.post('/api/page/', { page: value })
+      const updatedPages = [...data, value]
+      mutate(updatedPages, false)
+      modalRef.current.closeModal()
+      resetForm()
     },
-    [icon, imageTop, imageBottom]
+    [icon, imageTop, imageBottom, data, mutate]
   )
 
   return (
@@ -224,7 +241,10 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
                 />
               </ContainerContent>
 
-              <Editor handleChange={handleContentChange} />
+              <Editor
+                data={contentRef.current.value}
+                handleChange={handleContentChange}
+              />
 
               <ContainerContent>
                 <Checkbox

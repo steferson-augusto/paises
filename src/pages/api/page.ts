@@ -23,7 +23,59 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       return response.json([])
     }
     case 'POST': {
-      console.log('post')
+      const { page } = request.body
+      const {
+        countryId,
+        subtitle,
+        slug,
+        icon,
+        content,
+        imageTop,
+        imageBottom
+      } = page
+
+      const statement = await db.prepare(
+        'INSERT INTO pages (countryId, subtitle, slug, icon, content) VALUES (?, ?, ?, ?, ?)'
+      )
+      const result = await statement.run(
+        countryId,
+        subtitle,
+        slug,
+        icon,
+        content
+      )
+      await result.stmt.finalize()
+
+      const pageId = result.lastID
+      if (imageBottom) {
+        const { pathway, position, width, height } = imageBottom
+        const imageBottomStt = await db.prepare(
+          'INSERT INTO images (pageId, pathway, position, width, height) VALUES (?, ?, ?, ?, ?)'
+        )
+        const imageBottomResult = await imageBottomStt.run(
+          pageId,
+          pathway,
+          position,
+          width,
+          height
+        )
+        await imageBottomResult.stmt.finalize()
+      }
+
+      if (imageTop) {
+        const { pathway, position, width, height } = imageTop
+        const imageTopStt = await db.prepare(
+          'INSERT INTO images (pageId, pathway, position, width, height) VALUES (?, ?, ?, ?, ?)'
+        )
+        const imageTopResult = await imageTopStt.run(
+          pageId,
+          pathway,
+          position,
+          width,
+          height
+        )
+        await imageTopResult.stmt.finalize()
+      }
 
       return response.status(201).json({ message: 'Adicionado' })
     }
@@ -33,6 +85,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       return response.status(201).json({ message: 'Editado' })
     }
     case 'DELETE': {
+      // const { id } = request.query
       console.log('delete')
 
       return response.status(200).json({ message: 'Apagado' })
