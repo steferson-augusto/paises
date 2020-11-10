@@ -17,6 +17,17 @@ import {
 // import replaceSpecialChars from '../../../utils/replaceSpecialChars'
 // import Button from '../Button'
 
+export interface Image {
+  id?: number
+  pageId?: number
+  topicId?: number
+  pathway: string
+  position: 'top' | 'bottom'
+  width: string
+  height: string
+  label?: string
+}
+
 export interface Page {
   id?: number
   countryId: number
@@ -25,6 +36,9 @@ export interface Page {
   subtitle: string
   content: string
   countTopics?: number
+  topics?: any
+  imageTop?: Image
+  imageBottom?: Image
 }
 
 interface PagesProps {

@@ -17,10 +17,12 @@ import Input from '../../../styles/components/InputRef'
 import InputState from '../../../styles/components/Input'
 import {
   ContainerIcon,
-  ContainerContent
+  ContainerContent,
+  Form
 } from '../../../styles/components/[country]'
 import replaceSpecialChars from '../../../utils/replaceSpecialChars'
 import Checkbox from '../../../styles/components/Checkbox'
+import Button from '../../../styles/components/Button'
 
 const Editor = dynamic(() => import('../../../styles/components/CKEditor'), {
   ssr: false
@@ -40,9 +42,14 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
   const slugInputRef = useRef<HTMLInputElement>(null)
   const imgTopHeightInputRef = useRef<HTMLInputElement>(null)
   const imgTopWidthInputRef = useRef<HTMLInputElement>(null)
+  const imgTopPathInputRef = useRef<HTMLInputElement>(null)
+  const imgBottomHeightInputRef = useRef<HTMLInputElement>(null)
+  const imgBottomWidthInputRef = useRef<HTMLInputElement>(null)
+  const imgBottomPathInputRef = useRef<HTMLInputElement>(null)
   const contentRef = useRef({ value: '' })
   const [icon, setIcon] = useState('')
   const [imageTop, setImageTop] = useState(false)
+  const [imageBottom, setImageBottom] = useState(false)
 
   const handleSubtitleChange = useCallback(() => {
     const subtitle = subtitleInputRef.current?.value?.toLowerCase()
@@ -58,17 +65,61 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
   }, [])
 
   const handleChangeTopImage = useCallback(() => {
-    console.log(contentRef.current.value)
     if (imageTop) {
       imgTopWidthInputRef.current.value = ''
       imgTopHeightInputRef.current.value = ''
+      imgTopPathInputRef.current.value = ''
     }
     setImageTop(prev => !prev)
-  }, [])
+  }, [imageTop])
+
+  const handleChangeBottomImage = useCallback(() => {
+    if (imageBottom) {
+      imgBottomWidthInputRef.current.value = ''
+      imgBottomHeightInputRef.current.value = ''
+      imgBottomPathInputRef.current.value = ''
+    }
+    setImageBottom(prev => !prev)
+  }, [imageBottom])
 
   const handleContentChange = useCallback((event, editor) => {
     contentRef.current.value = editor.getData()
   }, [])
+
+  const handleSubmit = useCallback(
+    e => {
+      e.preventDefault()
+      // eslint-disable-next-line prefer-const
+      let value: Page = {
+        countryId: country.id,
+        subtitle: subtitleInputRef.current.value,
+        slug: slugInputRef.current.value,
+        content: contentRef.current.value,
+        icon
+      }
+
+      if (imageTop) {
+        value.imageTop = {
+          pathway: imgTopPathInputRef.current.value,
+          position: 'top',
+          width: imgTopWidthInputRef.current.value,
+          height: imgTopHeightInputRef.current.value
+        }
+      }
+
+      if (imageBottom) {
+        value.imageBottom = {
+          pathway: imgBottomPathInputRef.current.value,
+          position: 'bottom',
+          width: imgBottomWidthInputRef.current.value,
+          height: imgBottomHeightInputRef.current.value
+        }
+      }
+
+      console.log(value)
+    },
+    [icon, imageTop, imageBottom]
+  )
 
   return (
     <div>
@@ -90,77 +141,135 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
             </AddButton>
           </Body>
           <FullModal ref={modalRef} title="ADICIONAR PÁGINA">
-            <ContainerContent>
-              <Input
-                ref={subtitleInputRef}
-                name="subtitle"
-                label="Título"
-                type="text"
-                pattern=".+"
-                error={false}
-                message=""
-                onChange={handleSubtitleChange}
-                required
-              />
-              <Input
-                ref={slugInputRef}
-                name="slug"
-                label="Slug"
-                type="text"
-                pattern=".+"
-                error={false}
-                message=""
-                required
-                disabled
-              />
-              <ContainerIcon>
-                <i
-                  className={`fa fa-${
-                    icon.length ? icon : 'exclamation-triangle'
-                  }`}
-                />
-                <InputState
-                  name="icon"
-                  label="Ícone"
+            <Form onSubmit={handleSubmit}>
+              <ContainerContent>
+                <Input
+                  ref={subtitleInputRef}
+                  name="subtitle"
+                  label="Título"
                   type="text"
                   pattern=".+"
-                  value={icon}
-                  onChange={handleIconChange}
+                  error={false}
+                  message=""
+                  onChange={handleSubtitleChange}
+                  required
+                />
+                <Input
+                  ref={slugInputRef}
+                  name="slug"
+                  label="Slug"
+                  type="text"
+                  pattern=".+"
                   error={false}
                   message=""
                   required
+                  disabled
                 />
-              </ContainerIcon>
-            </ContainerContent>
-            <ContainerContent>
-              <Checkbox
-                title="Imagem Superior"
-                onChange={handleChangeTopImage}
-                checked={imageTop}
-              />
-              <Input
-                ref={imgTopWidthInputRef}
-                name="imgtop-width"
-                label="Largura"
-                type="number"
-                pattern=".+"
-                error={false}
-                message=""
-                disabled={!imageTop}
-              />
-              <Input
-                ref={imgTopHeightInputRef}
-                name="imgtop-height"
-                label="Altura"
-                type="number"
-                pattern=".+"
-                error={false}
-                message=""
-                disabled={!imageTop}
-              />
-            </ContainerContent>
+                <ContainerIcon>
+                  <i
+                    className={`fa fa-${
+                      icon.length ? icon : 'exclamation-triangle'
+                    }`}
+                  />
+                  <InputState
+                    name="icon"
+                    label="Ícone"
+                    type="text"
+                    pattern=".+"
+                    value={icon}
+                    onChange={handleIconChange}
+                    error={false}
+                    message=""
+                    required
+                  />
+                </ContainerIcon>
+              </ContainerContent>
+              <ContainerContent>
+                <Checkbox
+                  title="Imagem Superior"
+                  onChange={handleChangeTopImage}
+                  checked={imageTop}
+                />
+                <Input
+                  ref={imgTopPathInputRef}
+                  name="imgtop-path"
+                  label="Endereço"
+                  type="text"
+                  pattern=".+"
+                  error={false}
+                  message=""
+                  disabled={!imageTop}
+                />
+                <Input
+                  ref={imgTopWidthInputRef}
+                  name="imgtop-width"
+                  label="Largura"
+                  type="number"
+                  pattern=".+"
+                  error={false}
+                  message=""
+                  disabled={!imageTop}
+                  width="100px"
+                />
+                <Input
+                  ref={imgTopHeightInputRef}
+                  name="imgtop-height"
+                  label="Altura"
+                  type="number"
+                  pattern=".+"
+                  error={false}
+                  message=""
+                  disabled={!imageTop}
+                  width="100px"
+                />
+              </ContainerContent>
 
-            <Editor handleChange={handleContentChange} />
+              <Editor handleChange={handleContentChange} />
+
+              <ContainerContent>
+                <Checkbox
+                  title="Imagem Inferior"
+                  onChange={handleChangeBottomImage}
+                  checked={imageBottom}
+                />
+                <Input
+                  ref={imgBottomPathInputRef}
+                  name="imgbottom-path"
+                  label="Endereço"
+                  type="text"
+                  pattern=".+"
+                  error={false}
+                  message=""
+                  disabled={!imageBottom}
+                />
+                <Input
+                  ref={imgBottomWidthInputRef}
+                  name="imgbottom-width"
+                  label="Largura"
+                  type="number"
+                  pattern=".+"
+                  error={false}
+                  message=""
+                  disabled={!imageBottom}
+                  width="100px"
+                />
+                <Input
+                  ref={imgBottomHeightInputRef}
+                  name="imgbottom-height"
+                  label="Altura"
+                  type="number"
+                  pattern=".+"
+                  error={false}
+                  message=""
+                  disabled={!imageBottom}
+                  width="100px"
+                />
+              </ContainerContent>
+
+              <Button primary={true} icon="plus" type="submit">
+                Adicionar
+              </Button>
+            </Form>
           </FullModal>
         </Structure>
       </main>

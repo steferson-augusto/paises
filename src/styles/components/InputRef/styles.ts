@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 interface InputProps {
   error: boolean
+  width?: string
 }
 
 export const Message = styled.p<InputProps>`
@@ -12,7 +13,7 @@ export const Message = styled.p<InputProps>`
 
 export const InputField = styled.div<InputProps>`
   width: 100%;
-  max-width: 300px;
+  max-width: ${({ width }) => width ?? '300px'};
   position: relative;
   margin-top: 30px;
 

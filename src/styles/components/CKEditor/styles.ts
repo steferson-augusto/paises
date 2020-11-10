@@ -2,16 +2,11 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   width: 90%;
-  height: 600px;
   padding: 15px 0px;
   color: var(--text-color);
   --ck-color-text: var(--text-color);
   --ck-color-base-foreground: red;
   --ck-color-base-background: transparent;
-  /* --ck-color-base-active-focus: var(--primary);
-  --ck-color-base-active: var(--primary);
-  --ck-color-base-focus: #f00;
-  --ck-color-focus-border: #f00; */
   --ck-color-base-border: var(--text-color);
   --ck-focus-ring: 1px solid var(--primary);
   --ck-color-toolbar-background: transparent;

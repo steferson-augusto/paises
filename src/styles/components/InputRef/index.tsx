@@ -9,11 +9,11 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input: React.ForwardRefRenderFunction<HTMLInputElement, Props> = (
-  { name, label, error, message = '', ...rest },
+  { name, label, error, width, message = '', ...rest },
   ref
 ) => {
   return (
-    <InputField error={error}>
+    <InputField error={error} width={width as string}>
       <input id={name} {...rest} ref={ref} />
       <label htmlFor={name}>{label}</label>
 

@@ -19,7 +19,7 @@ export const ContainerIcon = styled.div`
   }
 `
 
-export const Editor = styled.div`
+export const Form = styled.form`
   width: 90%;
-  padding: 15px 0px;
+  margin-left: 5%;
 `

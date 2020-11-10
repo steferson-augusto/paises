@@ -4,7 +4,6 @@ export const Container = styled.label`
   z-index: 0;
   position: relative;
   display: inline-block;
-  color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
   font-family: var(
     --pure-material-font,
     'Roboto',
