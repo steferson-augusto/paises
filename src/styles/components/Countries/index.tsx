@@ -66,9 +66,9 @@ const Countries: React.FC<CountriesProps> = ({ countries, error, loading }) => {
 
   const handleSaveEdition = useCallback(() => {
     if (values?.id) {
-      axios.put('/api/country/', values)
+      axios.put('/api/country/', { values })
       const updatedCountries = countries?.map(country => {
-        if (country.id === values?.id) return values
+        if (country.id === values?.id) return { ...country, ...values }
         return country
       })
       mutate('/api/country', updatedCountries, false)

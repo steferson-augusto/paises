@@ -103,34 +103,33 @@ const CountryPages: React.FC<Props> = ({ toogleTheme, country }) => {
     e => {
       e.preventDefault()
       // eslint-disable-next-line prefer-const
-      let value: Page = {
+      const values: Page = {
         countryId: country.id,
         subtitle: subtitleInputRef.current.value,
         slug: slugInputRef.current.value,
         content: contentRef.current.value,
         icon
       }
+      const imageTopValues = imageTop
+        ? {
+            pathway: imgTopPathInputRef.current.value,
+            position: 'top',
+            width: imgTopWidthInputRef.current.value,
+            height: imgTopHeightInputRef.current.value
+          }
+        : null
 
-      if (imageTop) {
-        value.imageTop = {
-          pathway: imgTopPathInputRef.current.value,
-          position: 'top',
-          width: imgTopWidthInputRef.current.value,
-          height: imgTopHeightInputRef.current.value
-        }
-      }
+      const imageBottomValues = imageBottom
+        ? {
+            pathway: imgBottomPathInputRef.current.value,
+            position: 'bottom',
+            width: imgBottomWidthInputRef.current.value,
+            height: imgBottomHeightInputRef.current.value
+          }
+        : null
 
-      if (imageBottom) {
-        value.imageBottom = {
-          pathway: imgBottomPathInputRef.current.value,
-          position: 'bottom',
-          width: imgBottomWidthInputRef.current.value,
-          height: imgBottomHeightInputRef.current.value
-        }
-      }
-
-      axios.post('/api/page/', { page: value })
-      const updatedPages = [...data, value]
+      axios.post('/api/page/', { values, imageTopValues, imageBottomValues })
+      const updatedPages = [...data, values]
       mutate(updatedPages, false)
       modalRef.current.closeModal()
       resetForm()

@@ -39,9 +39,9 @@ const Create: React.FC<Props> = ({ toogleTheme }) => {
       } else {
         setErrorMessage('')
         const values = { title, slug }
-        axios.post('/api/country/', values)
+        axios.post('/api/country/', { values })
 
-        mutate([...data, values], false)
+        mutate([...data, { ...values, countPages: 0 }], false)
         modalRef.current?.closeModal()
         countryInputRef.current.value = ''
       }

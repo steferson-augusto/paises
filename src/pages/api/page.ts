@@ -1,80 +1,36 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { NextApiRequest, NextApiResponse } from 'next'
-import { open } from 'sqlite'
-import sqlite3 from 'sqlite3'
+
+import { openDB, models } from './country'
+import { Page } from '../../styles/components/Pages'
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
-  const db = await open({
-    filename: './database.sqlite',
-    driver: sqlite3.cached.Database
-  })
+  const sequelize = openDB()
+  const { Page, Image, Topic } = await models(sequelize)
 
   switch (request.method) {
     case 'GET': {
-      const { country } = request.query
-      if (country) {
-        const query = `SELECT * FROM pages WHERE countryId = "${country}"`
-        const pages = await db.all(query)
-        // country.pages = await db.all(
-        //   `SELECT * FROM pages WHERE countryId = ${country.id}`
-        // )
+      const { country: countryId } = request.query
+      if (countryId) {
+        const pages = await Page.findAll({
+          where: { countryId }
+        })
+        // console.log('All pages:', JSON.stringify(pages, null, 2))
         return response.json(pages)
       }
       return response.json([])
     }
     case 'POST': {
-      const { page } = request.body
-      const {
-        countryId,
-        subtitle,
-        slug,
-        icon,
-        content,
-        imageTop,
-        imageBottom
-      } = page
+      const { values, imageBottomValues, imageTopValues } = request.body
 
-      const statement = await db.prepare(
-        'INSERT INTO pages (countryId, subtitle, slug, icon, content) VALUES (?, ?, ?, ?, ?)'
-      )
-      const result = await statement.run(
-        countryId,
-        subtitle,
-        slug,
-        icon,
-        content
-      )
-      await result.stmt.finalize()
+      const { id: pageId } = ((await Page.create(values)) as unknown) as Page
 
-      const pageId = result.lastID
-      if (imageBottom) {
-        const { pathway, position, width, height } = imageBottom
-        const imageBottomStt = await db.prepare(
-          'INSERT INTO images (pageId, pathway, position, width, height) VALUES (?, ?, ?, ?, ?)'
-        )
-        const imageBottomResult = await imageBottomStt.run(
-          pageId,
-          pathway,
-          position,
-          width,
-          height
-        )
-        await imageBottomResult.stmt.finalize()
+      if (imageBottomValues) {
+        await Image.create({ ...imageBottomValues, pageId })
       }
 
-      if (imageTop) {
-        const { pathway, position, width, height } = imageTop
-        const imageTopStt = await db.prepare(
-          'INSERT INTO images (pageId, pathway, position, width, height) VALUES (?, ?, ?, ?, ?)'
-        )
-        const imageTopResult = await imageTopStt.run(
-          pageId,
-          pathway,
-          position,
-          width,
-          height
-        )
-        await imageTopResult.stmt.finalize()
+      if (imageTopValues) {
+        await Image.create({ ...imageTopValues, pageId })
       }
 
       return response.status(201).json({ message: 'Adicionado' })
@@ -86,9 +42,10 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     }
     case 'DELETE': {
       const { id } = request.query
-      const statement = await db.prepare('DELETE FROM pages WHERE id = ?')
-      const result = await statement.run(id)
-      await result.stmt.finalize()
+      await Image.destroy({ where: { pageId: id } })
+      await Topic.destroy({ where: { pageId: id } })
+      await Page.destroy({ where: { id } })
+      sequelize.close()
 
       return response.status(200).json({ message: 'Apagado' })
     }

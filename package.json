@@ -25,6 +25,7 @@
     "react-element-to-jsx-string": "^14.3.2",
     "react-switch": "^5.0.1",
     "sass": "^1.26.12",
+    "sequelize": "^6.3.5",
     "sqlite": "^4.0.15",
     "sqlite3": "^5.0.0",
     "styled-components": "^5.2.0",
